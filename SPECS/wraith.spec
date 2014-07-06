@@ -8,7 +8,7 @@ URL: http://wraith.botpack.net
 Packager: Taylor Kimball <taylor@linuxhq.org>
 Source: http://downloads.sourceforge.net/project/wraithbotpack/src/tags/%{name}-v%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: openssl-devel, tcl-devel
+BuildRequires: gcc-c++, openssl-devel, tcl-devel
 
 %description
 Wraith is an open source IRC bot written in C++. It has been in 
