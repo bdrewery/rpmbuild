@@ -2,11 +2,10 @@ Summary: Wraith IRC bot
 Name: wraith
 Version: 1.4.3
 Release: 1%{?dist}
+URL: http://wraith.botpack.net
+Source: http://downloads.sourceforge.net/project/wraithbotpack/src/tags/%{name}-v%{version}.tar.gz
 License: GPL
 Group: Applications/Internet
-URL: http://wraith.botpack.net
-Packager: Taylor Kimball <taylor@linuxhq.org>
-Source: http://downloads.sourceforge.net/project/wraithbotpack/src/tags/%{name}-v%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
 BuildRequires: gcc-c++, openssl-devel, tcl-devel
 
@@ -20,7 +19,6 @@ since evolved into something much different at its core.
 
 %build
 %configure \
-	--with-openssl=%{_prefix} \
 	--with-tclinc="%{_includedir}/tcl.h" \
 	--with-tcllib="%{_libdir}/libtcl.so"
 %{__make} 
