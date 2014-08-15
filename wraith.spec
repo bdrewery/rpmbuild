@@ -20,6 +20,7 @@ since evolved into something much different at its core.
 
 %build
 git clone https://github.com/wraith/wraith.git
+pushd %{name}
 
 %configure \
 	--with-tclinc="%{_includedir}/tcl.h" \
