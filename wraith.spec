@@ -7,7 +7,8 @@ Source: http://downloads.sourceforge.net/project/wraithbotpack/src/tags/%{name}-
 License: GPL
 Group: Applications/Internet
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-BuildRequires: gcc-c++, openssl-devel, tcl-devel
+Requires: openssl, tcl
+BuildRequires: gcc-c++, git, openssl-devel, tcl-devel
 
 %description
 Wraith is an open source IRC bot written in C++. It has been in 
@@ -15,9 +16,11 @@ development since late 2003. It is based on Eggdrop 1.6.12 but has
 since evolved into something much different at its core.
 
 %prep
-%setup -n %{name}-v%{version}
+%setup -T -c
 
 %build
+git clone https://github.com/wraith/wraith.git
+
 %configure \
 	--with-tclinc="%{_includedir}/tcl.h" \
 	--with-tcllib="%{_libdir}/libtcl.so"
