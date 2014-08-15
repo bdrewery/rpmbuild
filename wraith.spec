@@ -1,14 +1,16 @@
-Summary: Wraith IRC bot
-Name: wraith
-Version: 1.4.3
-Release: 1%{?dist}
-URL: http://wraith.botpack.net
-Source: http://downloads.sourceforge.net/project/wraithbotpack/src/tags/%{name}-v%{version}.tar.gz
-License: GPL
-Group: Applications/Internet
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-Requires: openssl, tcl
-BuildRequires: gcc-c++, git, openssl-devel, tcl-devel
+%define date    %(date +"%Y%m%d")
+
+Summary:        Wraith IRC bot
+Name:           wraith
+Version:        %{date}
+Release:        1%{?dist}
+URL:            http://wraith.botpack.net
+Source:         https://github.com/wraith
+License:        GPL
+Group:          Applications/Internet
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+Requires:       openssl, tcl
+BuildRequires:  gcc-c++, git, openssl-devel, tcl-devel
 
 %description
 Wraith is an open source IRC bot written in C++. It has been in 
@@ -41,5 +43,5 @@ pushd %{name}
 %{_bindir}/%{name}
 
 %changelog
-* Sun Jul 06 2014 Taylor Kimball <taylor@linuxhq.org> - 1.4.3-1
+* Sun Jul 06 2014 Taylor Kimball <taylor@linuxhq.org> - %{version}-1
 - Initial package.
