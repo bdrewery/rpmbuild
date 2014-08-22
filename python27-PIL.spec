@@ -1,9 +1,7 @@
 %define         __python /usr/bin/python2.7
 %{!?pyver: %define pyver %(%{__python} -c "import sys ; print sys.version[:3]")}
-
 %define         py_basever 27
 %define         name python%{py_basever}-PIL
-%define         __os_install_post %{nil}
 
 Name:           %{name} 
 Version:        1.1.7
@@ -32,7 +30,7 @@ Python Imaging Library
 
 %install
 %{__rm} -rf %{buildroot}
-%{__python} setup.py install --root %{buildroot} --install-data=%{_datadir}
+%{__python} setup.py install --root %{buildroot} 
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -45,5 +43,5 @@ Python Imaging Library
 %{_libdir}/python%{pyver}/site-packages/PIL/*
 
 %changelog
-* Fri Aug 22 2014 Taylor Kimball <taylor@linuxhq.org> - 1.1.7-1
+* Mon Aug 22 2014 Taylor Kimball <taylor@linuxhq.org> - 1.1.7-1
 - Initial spec.
