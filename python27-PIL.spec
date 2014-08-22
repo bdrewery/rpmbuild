@@ -45,5 +45,5 @@ Python Imaging Library
 %{_libdir}/python%{pyver}/site-packages/PIL/*
 
 %changelog
-* Mon Aug 22 2014 Taylor Kimball <taylor@linuxhq.org> - 1.1.7-1
+* Fri Aug 22 2014 Taylor Kimball <taylor@linuxhq.org> - 1.1.7-1
 - Initial spec.
