@@ -18,8 +18,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python%{py_basever}-devel python%{py_basever}-setuptools
 BuildRequires:  freetype-devel, libjpeg-devel, lcms-devel
-Requires:       python%{py_basever}-setuptools
-Requires:       python%{py_basever}
+Requires:       python%{py_basever}, python%{py_basever}-setuptools
+Requires:       freetype, libjpeg, lcms
 
 %description
 Python Imaging Library
