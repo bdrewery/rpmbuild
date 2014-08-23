@@ -15,9 +15,9 @@ Source0:        PIL-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  python%{py_basever}-devel python%{py_basever}-setuptools
-BuildRequires:  freetype-devel, libjpeg-devel, lcms-devel
+BuildRequires:  freetype-devel, libjpeg-devel, lcms-devel, tcl-devel, tk-devel, tkinter27
 Requires:       python%{py_basever}, python%{py_basever}-setuptools
-Requires:       freetype, libjpeg, lcms
+Requires:       freetype, libjpeg, lcms, tcl, tk, tkinter27
 
 %description
 Python Imaging Library
