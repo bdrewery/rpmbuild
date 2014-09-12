@@ -4,7 +4,7 @@ Version:        1.9.0
 Release:        1%{dist}
 URL:            https://source.a2o.si/download/snoopy/
 Group:          Applications/Monitoring
-BuildRoot       %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  autoconf, git, gcc, make
 License:        GPL
 Packager:       Taylor Kimball <taylor@linuxhq.org>
