@@ -38,3 +38,7 @@ rm -rf %{buildroot}
 %doc %{name}/ChangeLog %{name}/COPYING %{name}/README.filtering %{name}/README.md %{name}/TODO
 %config(noreplace) %{_sysconfdir}/ld.so.preload
 %{_libdir}/%{name}.so
+
+%changelog
+* Fri Sep 12 2014 Taylor Kimball <taylor@linuxhq.org> - 1.9.0-1
+- Initial spec.
