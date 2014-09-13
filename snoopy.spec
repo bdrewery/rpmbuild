@@ -25,8 +25,10 @@ autoreconf
 
 %install
 pushd %{name}
+%{__install} -d -m 755 %{buildroot}%{_bindir}
 %{__install} -d -m 755 %{buildroot}%{_libdir}
 %{__install} -d -m 755 %{buildroot}%{_sysconfdir}
+%{__install} -m 755 detect %{buildroot}%{_bindir}
 %{__install} -m 755 %{name}.so %{buildroot}%{_libdir}
 echo "%{_libdir}/%{name}.so" >> %{buildroot}%{_sysconfdir}/ld.so.preload
 
@@ -37,6 +39,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 %doc %{name}/ChangeLog %{name}/COPYING %{name}/README.filtering %{name}/README.md %{name}/TODO
 %config(noreplace) %{_sysconfdir}/ld.so.preload
+%{_bindir}/detect
 %{_libdir}/%{name}.so
 
 %changelog
