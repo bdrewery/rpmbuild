@@ -6,6 +6,7 @@ URL:            https://source.a2o.si/download/snoopy/
 Group:          Applications/Monitoring
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  autoconf, automake, git, gcc, make
+%{?el5:Requires: autoconf26}
 License:        GPL
 Packager:       Taylor Kimball <taylor@linuxhq.org>
 
@@ -19,7 +20,11 @@ It is very useful to track and monitor the users.
 %build
 git clone https://github.com/tkimball83/%{name}.git
 pushd %{name}
+%if %{el5}
+autoreconf26
+%else
 autoreconf
+%endif
 %configure --with-environment=GECOS
 %{__make}
 
