@@ -6,9 +6,9 @@ URL:            https://source.a2o.si/download/snoopy/
 Group:          Applications/Monitoring
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  automake, git, gcc, make
-%{?el5:Requires: autoconf26}
-%{?el6:Requires: autoconf}
-%{?el7:Requires: autoconf}
+%{?el5:BuildRequires: autoconf26}
+%{?el6:BuildRequires: autoconf}
+%{?el7:BuildRequires: autoconf}
 License:        GPL
 Packager:       Taylor Kimball <taylor@linuxhq.org>
 
