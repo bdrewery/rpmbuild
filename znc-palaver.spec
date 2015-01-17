@@ -1,4 +1,4 @@
-%define date    %(date +"%Y%M%d")
+%define date    %(date +"%Y%m%d")
 %define module  palaver
 
 Name:           znc-%{module}
