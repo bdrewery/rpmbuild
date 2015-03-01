@@ -1,16 +1,13 @@
-Summary:        User monitoring and command logging
-Name:           snoopy
-Version:        1.9.0
-Release:        1%{dist}
-URL:            https://source.a2o.si/download/snoopy/
-Group:          Applications/Monitoring
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-BuildRequires:  automake, git, gcc, make
-%{?el5:BuildRequires: autoconf26}
-%{?el6:BuildRequires: autoconf}
-%{?el7:BuildRequires: autoconf}
-License:        GPL
-Packager:       Taylor Kimball <taylor@linuxhq.org>
+Name:		snoopy
+Version:	2.2.4
+Release:	1%{dist}
+Summary:	User monitoring and command logging
+Group:		Applications/Monitoring
+License:	GPL
+URL:		https://github.com/a2o/snoopy
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildRequires:  autoconf, automake, git, gcc, make
 
 %description
 Snoopy Logger, logs all the commands issued by local users on the system.
@@ -20,23 +17,22 @@ It is very useful to track and monitor the users.
 %setup -T -c
 
 %build
-git clone https://github.com/tkimball83/%{name}.git
+git clone https://github.com/a2o/snoopy.git
 pushd %{name}
-%if %{el5}
-autoreconf26
-%else
-autoreconf
+%if 0%{?el6}
+%{__sed} -i -e 's/^AM_PROG_AR/#AM_PROG_AR/' configure.ac
 %endif
-%configure --with-environment=GECOS
-%{__make}
+%{__sed} -i -e 's/$(sysconfdir)\/snoopy.ini/$(DESTDIR)$(sysconfdir)\/snoopy.ini/g' etc/Makefile.am
+./autogen.sh
+%configure --prefix=%{_prefix} \
+           --sysconfdir=%{_sysconfdir} \
+           --enable-config-file 
+%{__make} %{?_smp_mflags}
+%{__install} -d -m 755 %{buildroot}%{_sysconfdir}
 
 %install
 pushd %{name}
-%{__install} -d -m 755 %{buildroot}%{_bindir}
-%{__install} -d -m 755 %{buildroot}%{_libdir}
-%{__install} -d -m 755 %{buildroot}%{_sysconfdir}
-%{__install} -m 755 detect %{buildroot}%{_bindir}
-%{__install} -m 755 %{name}.so %{buildroot}%{_libdir}
+%{__make} install DESTDIR=%{buildroot}
 echo "%{_libdir}/%{name}.so" >> %{buildroot}%{_sysconfdir}/ld.so.preload
 
 %clean
@@ -44,11 +40,13 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc %{name}/ChangeLog %{name}/COPYING %{name}/README.filtering %{name}/README.md %{name}/TODO
+%doc %{name}/ChangeLog %{name}/COPYING %{name}/README.md
 %config(noreplace) %{_sysconfdir}/ld.so.preload
-%{_bindir}/detect
-%{_libdir}/%{name}.so
+%{_bindir}/%{name}-*
+%{_libdir}/lib%{name}.*
+%{_sbindir}/%{name}-*
+%{_sysconfdir}/%{name}.ini
 
 %changelog
-* Fri Sep 12 2014 Taylor Kimball <taylor@linuxhq.org> - 1.9.0-1
+* Sat Feb 28 2015 Taylor Kimball <taylor@linuxhq.org> - 2.2.4-1
 - Initial spec.
