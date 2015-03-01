@@ -33,7 +33,7 @@ pushd %{name}
 %install
 pushd %{name}
 %{__make} install DESTDIR=%{buildroot}
-echo "%{_libdir}/%{name}.so" >> %{buildroot}%{_sysconfdir}/ld.so.preload
+echo "%{_libdir}/lib%{name}.so" >> %{buildroot}%{_sysconfdir}/ld.so.preload
 
 %clean
 rm -rf %{buildroot}
