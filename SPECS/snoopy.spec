@@ -1,5 +1,5 @@
 Name:		snoopy
-Version:	2.2.4
+Version:	2.2.6
 Release:	1%{dist}
 Summary:	User monitoring and command logging
 Group:		Applications/Monitoring
@@ -7,7 +7,7 @@ License:	GPL
 URL:		https://github.com/a2o/snoopy
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  autoconf, automake, git, gcc, make
+BuildRequires:  autoconf, automake, git, gcc, libtool, make
 
 %description
 Snoopy Logger, logs all the commands issued by local users on the system.
@@ -22,7 +22,6 @@ pushd %{name}
 %if 0%{?el6}
 %{__sed} -i -e 's/^AM_PROG_AR/#AM_PROG_AR/' configure.ac
 %endif
-%{__sed} -i -e 's/$(sysconfdir)\/snoopy.ini/$(DESTDIR)$(sysconfdir)\/snoopy.ini/g' etc/Makefile.am
 ./autogen.sh
 %configure --prefix=%{_prefix} \
            --sysconfdir=%{_sysconfdir} \
@@ -48,5 +47,5 @@ rm -rf %{buildroot}
 %{_sysconfdir}/%{name}.ini
 
 %changelog
-* Sat Feb 28 2015 Taylor Kimball <taylor@linuxhq.org> - 2.2.4-1
+* Sat Feb 28 2015 Taylor Kimball <taylor@linuxhq.org> - 2.2.6-1
 - Initial spec.
