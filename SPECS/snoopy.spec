@@ -22,15 +22,12 @@ Snoopy is a tiny library that logs all executed commands (+ arguments) on your s
 %prep
 %setup -q -n %{name}-%{git_commit}
 %build
-%{__rm} -rf lib/iniparser 
-%{__tar} xvf %{SOURCE1}
-%{__mv} -f iniparser-%{git_sub_commit} lib/iniparser
-
 %if 0%{?el6}
 %{__sed} -i -e "s/m4_esyscmd_s.*/[%{git_commit}],/" configure.ac
 %{__sed} -i -e "s/\ -Werror//g" configure.ac build/Makefile.am.common
 %endif
 
+%{__tar} zxvf %{SOURCE1} -C ./lib/iniparser --strip-components=1
 bash bootstrap.sh
 %configure --enable-everything
 %{__make} %{?_smp_mflags}
