@@ -1,36 +1,41 @@
+%global date 20150824
+%global git_commit 51914ec15ec2c6881f52e2a7df94afdf95e3b8c9
+%global short_commit %(c=%{git_commit}; echo ${c:0:7})
+%global git_sub_commit 5c71d5640fa60a5d19aed85d01a88e2424b176c4
+%global short_sub_commit %(c=%{git_sub_commit}; echo ${c:0:7})
+
 Name:		snoopy
-Version:	2.2.6
+Version:	%{date}git%{short_commit}
 Release:	1%{dist}
 Summary:	User monitoring and command logging
 Group:		Applications/Monitoring
 License:	GPL
-URL:		https://github.com/a2o/snoopy
+URL:		https://github.com/a2o/%{name}
+Source0:	https://github.com/a2o/%{name}/archive/%{git_commit}/%{name}-%{git_commit}.tar.gz
+Source1:	https://github.com/a2o/iniparser/archive/%{git_sub_commit}/iniparser-%{git_sub_commit}.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-BuildRequires:  autoconf, automake, git, gcc, libtool, make
+BuildRequires:  autoconf, automake, git, gcc, libtool, make, socat
 
 %description
-Snoopy Logger, logs all the commands issued by local users on the system.
-It is very useful to track and monitor the users.
+Snoopy is a tiny library that logs all executed commands (+ arguments) on your system.
 
 %prep
-%setup -T -c
-
+%setup -q -n %{name}-%{git_commit}
 %build
-git clone https://github.com/a2o/snoopy.git
-pushd %{name}
+%{__rm} -rf lib/iniparser 
+%{__tar} xvf %{SOURCE1}
+%{__mv} -f iniparser-%{git_sub_commit} lib/iniparser
+
 %if 0%{?el6}
-%{__sed} -i -e 's/^AM_PROG_AR/#AM_PROG_AR/' configure.ac
+%{__sed} -i -e "s/m4_esyscmd_s.*/[%{git_commit}],/" configure.ac
+%{__sed} -i -e "s/\ -Werror//g" configure.ac build/Makefile.am.common
 %endif
-./autogen.sh
-%configure --prefix=%{_prefix} \
-           --sysconfdir=%{_sysconfdir} \
-           --enable-config-file 
+
+bash bootstrap.sh
+%configure --enable-everything
 %{__make} %{?_smp_mflags}
-%{__install} -d -m 755 %{buildroot}%{_sysconfdir}
 
 %install
-pushd %{name}
 %{__make} install DESTDIR=%{buildroot}
 echo "%{_libdir}/lib%{name}.so" >> %{buildroot}%{_sysconfdir}/ld.so.preload
 
@@ -39,7 +44,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc %{name}/ChangeLog %{name}/COPYING %{name}/README.md
+%doc ChangeLog CONTRIBUTING.md COPYING README.md contrib doc
 %config(noreplace) %{_sysconfdir}/ld.so.preload
 %{_bindir}/%{name}-*
 %{_libdir}/lib%{name}.*
@@ -47,5 +52,8 @@ rm -rf %{buildroot}
 %{_sysconfdir}/%{name}.ini
 
 %changelog
+* Mon Aug 24 2015 Taylor Kimball <taylor@linuxhq.org> - 20150824git51914ec-1  
+- Spec file refactor with latest update
+
 * Sat Feb 28 2015 Taylor Kimball <taylor@linuxhq.org> - 2.2.6-1
 - Initial spec.
