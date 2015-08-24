@@ -21,11 +21,10 @@ directly out of hatop and monitor the results immediately.
 %prep
 %setup -q -n %{name}-%{version}
 %build
-
-%install
 %{__install} -d -m 0755 %{buildroot}%{_sbindir}
 %{__install} -d -m 0755 %{buildroot}%{_datadir}/man/man1
 
+%install
 %{__install} -m 0755 bin/%{name} %{buildroot}%{_sbindir}
 %{__install} -m 0644 man/%{name}.1 %{buildroot}%{_datadir}/man/man1
 %{__gzip} -9 %{buildroot}%{_datadir}/man/man1/%{name}.1
