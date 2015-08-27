@@ -9,7 +9,7 @@ Summary:        Palaver ZNC Module
 Group:          System Environment/Daemons
 License:        GPL
 URL:            https://github.com/cocodelabs/znc-palaver
-Source0:        https://github.com/PagerDuty/%{name}/archive/%{git_commit}/%{name}-%{git_commit}.tar.gz
+Source0:        https://github.com/cocodelabs/%{name}/archive/%{git_commit}/%{name}-%{git_commit}.tar.gz
 Requires:       znc
 BuildRequires:  gcc-c++, git, make, znc-devel
 
