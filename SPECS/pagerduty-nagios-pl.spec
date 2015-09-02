@@ -11,7 +11,7 @@ Group:		Applications/System
 License:	PagerDuty
 URL:		https://github.com/PagerDuty/%{name}
 Source0:	https://github.com/PagerDuty/%{name}/archive/%{git_commit}/%{name}-%{git_commit}.tar.gz
-BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:	noarch
 Requires:	perl-libwww-perl
 
