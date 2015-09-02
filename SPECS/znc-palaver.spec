@@ -10,6 +10,7 @@ Group:          System Environment/Daemons
 License:        GPL
 URL:            https://github.com/cocodelabs/znc-palaver
 Source0:        https://github.com/cocodelabs/%{name}/archive/%{git_commit}/%{name}-%{git_commit}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:       znc
 BuildRequires:  gcc-c++, git, make, znc-devel
 

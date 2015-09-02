@@ -1,14 +1,14 @@
 %define date    %(date +"%Y%m%d")
 
-Summary:        Wraith IRC bot
 Name:           wraith
 Version:        %{date}
 Release:        1%{?dist}
-URL:            http://wraith.botpack.net
-Source:         https://github.com/wraith
-License:        GPL
+Summary:        Wraith IRC Bot
 Group:          Applications/Internet
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
+License:        GPL
+URL:            http://wraith.botpack.net
+Source0:        https://github.com/wraith
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:       openssl, tcl
 BuildRequires:  gcc-c++, git, openssl-devel, tcl-devel
 
